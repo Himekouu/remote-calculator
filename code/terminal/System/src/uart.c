@@ -3,14 +3,14 @@
 
 //宏定义
 
-#define RX_LENGTH 3
+#define RX_LENGTH 3             //接收数据的长度
 
 //变量定义
 
-uint8_t RX_Flag;
-uint8_t RX_Data[6];
-uint8_t RX_Length;
-uint8_t RX_State;
+uint8_t RX_Flag;                //接收数据标志
+uint8_t RX_Data[RX_LENGTH * 2]; //接收数据数组
+uint8_t RX_Length;              //已接收数据的长度
+uint8_t RX_State;               //接收状态
 
 //函数定义
 
@@ -63,11 +63,11 @@ void Uart_Send2Byte(uint16_t _2Byte)
 void Uart_SendFrame(uint16_t* Data, uint8_t Length)
 {
   uint8_t i;
-  Uart_SendByte(0xFF);
-  for(i = 0; i < Length; i ++){
+  Uart_SendByte(0xFF);          //发送帧头
+  for(i = 0; i < Length; i ++){ //发送数据
     Uart_Send2Byte(Data[i]);
   }
-  Uart_SendByte(0xFE);
+  Uart_SendByte(0xFE);          //发送帧尾
 }
 
 /**
@@ -97,11 +97,11 @@ void Uart_ReceiveByte(void) interrupt 4
     RI = 0;
     Data = SBUF;
     if(RX_State == 0){
-      if(Data == 0xFF){
+      if(Data == 0xFF){     //识别帧头
         RX_State = 1;
       }
     }
-    else if(RX_State == 1){
+    else if(RX_State == 1){ //接收数据
       RX_Data[RX_Length] = Data;
       RX_Length ++;
       if(RX_Length > (RX_LENGTH * 2 - 1)){
@@ -109,7 +109,7 @@ void Uart_ReceiveByte(void) interrupt 4
         RX_State = 2;
       }
     }
-    else if(RX_State == 2){
+    else if(RX_State == 2){ //识别帧尾
       if(Data == 0xFE){
         RX_State = 0;
         RX_Flag = 1;
