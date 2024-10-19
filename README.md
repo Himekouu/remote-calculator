@@ -3,11 +3,11 @@
 串口通信的远程计算器
 
 ## 文件目录
-├── code/           //存放代码和keil工程文件
-│   ├── executor/   //执行机的代码和工程
-│   └── terminal/   //终端机的代码和工程
-├── doc/            //存放图片和文档
-└── proteus/        //存放Proteus工程文件
+├── code/           //存放代码和keil工程文件  
+│   ├── executor/   //执行机的代码和工程  
+│   └── terminal/   //终端机的代码和工程  
+├── doc/            //存放图片和文档  
+└── proteus/        //存放Proteus工程文件  
 
 ## 任务要求
 <div><img src="/doc/task.png"/> </div>
