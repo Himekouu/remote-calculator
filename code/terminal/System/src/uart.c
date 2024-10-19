@@ -21,14 +21,14 @@ uint8_t RX_State;
   */
 void Uart_Init(void)
 {
-  SCON  = 0x50;
-  EA    = 1   ;
-  ES    = 1   ;
-  PCON  = 0   ;
-  TMOD  = 0x20;
-  TL1   = 0xfd;
-  TH1   = 0xfd;
-  TR1   = 1   ;
+  SCON  = 0x50; //8位UART，波特率可变
+  EA    = 1   ; //开放中断
+  ES    = 1   ; //允许串行口中断
+  PCON  = 0x00; //设置SMOD = 0, SMOD0 = 0
+  TMOD  = 0x20; //设置定时器/计数器1定时、工作方式2
+  TL1   = 0xfd; //设置波特率低8位
+  TH1   = 0xfd; //设置波特率高8位
+  TR1   = 1   ; //启动定时器/计数器1
 }
 
 /**
