@@ -96,6 +96,7 @@ void main()
 					Cursor --;
 				}
 				else if((Key == 12) && (Length != 0)){	//输入等号
+					Uart_ClearRxFlag(); //清除输入等号前接收到的别的终端机的数据
 					State = 0;
 					Cursor ++;
 					LCD_ShowChar(1, Cursor, '=');

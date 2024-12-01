@@ -86,6 +86,15 @@ void Uart_GetRxdata(uint16_t* ReceivedData)
 }
 
 /**
+  * @brief  清除串口接收标志
+  * @retval 无
+  */
+void Uart_ClearRxFlag(void)
+{
+  RX_Flag = 0;
+}
+
+/**
   * @brief  串口接收数据中断
   * @param  无
   * @retval 无
